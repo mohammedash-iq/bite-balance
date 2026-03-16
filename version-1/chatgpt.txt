@@ -1,0 +1,4 @@
+design: google's material 3 expressive like design with simple animations.
+task: create react component that is defined below 
+technology used :react , tailwind for css.
+component : a bottom navigation bar with 4 icons.
