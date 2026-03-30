@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { FiHome, FiUser, FiList, FiCamera } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 export default function BottomNav() {
   const [active, setActive] = useState(0);
+  const navigate = useNavigate();
   const navItems = [
     { icon: <FiHome size={22} />, hrefLink: "/" },
     { icon: <FiCamera size={22} />, hrefLink: "/scan" },
@@ -19,6 +21,7 @@ export default function BottomNav() {
               key={index}
               onClick={() => {
                 setActive(index);
+                navigate(item.hrefLink);
               }}
               className={`relative flex flex-col items-center justify-center px-4 py-2 rounded-2xl ${active == index ? "bg-green-200" : ""}`}
             >

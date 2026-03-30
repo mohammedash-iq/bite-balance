@@ -1,4 +1,5 @@
-design: google's material 3 expressive like design with simple animations.
+design: google's material 3 expressive like design with no animations only some hover effects and make sure the code is readable and minimal.
+color : use white background with green colors, colors like green-200, green-300 and green-500.
 task: create react component that is defined below 
 technology used :react , tailwind for css.
 component : a bottom navigation bar with 4 icons.

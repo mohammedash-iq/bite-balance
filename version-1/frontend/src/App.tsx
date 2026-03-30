@@ -14,8 +14,9 @@ function App() {
           <Route path="/updates" element={<Updates />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
         </Routes>
+        <NavigationBar></NavigationBar>
       </BrowserRouter>
-      <NavigationBar></NavigationBar>
+
     </>
   );
 }
