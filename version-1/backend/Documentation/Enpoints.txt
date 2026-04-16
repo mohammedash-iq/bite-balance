@@ -1,0 +1,15 @@
+The food Scan Enpoint :
+    POST - /meal/scan 
+            * input : {type:enum,content:object}
+    POST - /meal/manual
+            * input : {meal:enum , type:string, quantity:string}
+
+The user authentication Endpoint:
+    POST - /user/login
+            * input :{ username:string, password:string }
+            * output : { success:boolean, accesstoken:string }
+    POST - /user/signin
+            * input:{ username:"username",email:"email",password:"password"}
+            * output : { success:boolean , accesstoken:string }
+    GET - /user/refresh
+            * output :{ success:boolean, accesstoken:stringss}
