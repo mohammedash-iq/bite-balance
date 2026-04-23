@@ -4,6 +4,9 @@ import userAuth from "./routes/userAuthenticationRoutes.js";
 const app = express()
 const PORT = 8090;
 
+// middleware to parse JSON request bodies
+app.use(express.json());
+
 // the meal scan enpoint 
 app.use("/meal", foodScan);
 
