@@ -6,10 +6,10 @@ export default function BottomNav() {
   const [active, setActive] = useState(0);
   const navigate = useNavigate();
   const navItems = [
-    { icon: <FiHome size={22} />, hrefLink: "/" },
-    { icon: <FiCamera size={22} />, hrefLink: "/scan" },
-    { icon: <FiList size={22} />, hrefLink: "/updates" },
-    { icon: <FiUser size={22} />, hrefLink: "/profile" },
+    { icon: <FiHome size={22} />, hrefLink: "/dashboard" },
+    { icon: <FiCamera size={22} />, hrefLink: "/dashboard/scan" },
+    { icon: <FiList size={22} />, hrefLink: "/dashboard/updates" },
+    { icon: <FiUser size={22} />, hrefLink: "/dashboard/profile" },
   ];
 
   return (

@@ -1,23 +1,18 @@
-import NavigationBar from "./components/NavigationBar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Scan from "./pages/Scan";
-import Dashboard from "./pages/Dashboard";
-import Updates from "./pages/Updates";
-import Profile from "./pages/Profile";
+import LoginPage from "./screens/LoginPage";
+import SigninPage from "./screens/SigninPage";
+import MainPage from "./screens/MainPage";
+import DashboardPage from "./screens/DashboardPage";
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Dashboard />}></Route>
-          <Route path="/scan" element={<Scan />}></Route>
-          <Route path="/updates" element={<Updates />}></Route>
-          <Route path="/profile" element={<Profile />}></Route>
-        </Routes>
-        <NavigationBar></NavigationBar>
-      </BrowserRouter>
-
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signin" element={<SigninPage />} />
+        <Route path="/dashboard/*" element={<DashboardPage></DashboardPage>}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
