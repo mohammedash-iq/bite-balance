@@ -1,5 +1,5 @@
 async function loginApiCall({ email, password }) {
-    const response = await fetch("http://localhost:5000/authentication/login", {
+    const response = await fetch("http://localhost:8090/authenticate/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -8,8 +8,8 @@ async function loginApiCall({ email, password }) {
     });
     return response;
 }
-async function signupApiCall({ username, email, password }) {
-    const response = await fetch("http://localhost:5000/authentication/signup", {
+async function signinApiCall({ username, email, password }) {
+    const response = await fetch("http://localhost:8090/authenticate/signin", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -20,4 +20,4 @@ async function signupApiCall({ username, email, password }) {
 }
 
 
-export { loginApiCall, signupApiCall }
+export { loginApiCall, signinApiCall }

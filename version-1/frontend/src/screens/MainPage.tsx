@@ -1,30 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import Navbar from "../components/main-page-component/navbar";
 function MainPage() {
-  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-black text-white flex flex-col justify-between">
-      {/* Header */}
-      <header className="flex justify-between items-center px-8 py-6 border-b border-gray-800">
-        <h1 className="text-xl font-semibold tracking-tight">NutriTrack</h1>
-        <div className="space-x-4">
-          <button
-            className="text-gray-300 hover:text-white transition"
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            Login
-          </button>
-          <button className="bg-white text-black px-4 py-2 rounded-md font-medium hover:bg-gray-200 transition"
-          onClick={() => {
-              navigate("/signin");
-            }}>
-            Sign Up
-          </button>
-        </div>
-      </header>
-
-      {/* Main Content */}
+      <Navbar></Navbar>
       <main className="flex flex-col items-center justify-center text-center px-6">
         <h2 className="text-4xl md:text-5xl font-semibold leading-tight max-w-2xl">
           Track your nutrition.
