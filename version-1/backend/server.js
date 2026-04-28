@@ -1,18 +1,15 @@
 import express from "express"
 import foodScan from "./routes/foodScanRoutes.js";
-import userAuth from "./routes/userAuthenticationRoutes.js";
+import authRoute from "./routes/authenticationRoute.js";
+import authenticateToken from "./middleware/jwtMiddleware.js";
 const app = express()
 const PORT = 8090;
 
-// middleware to parse JSON request bodies
+// middleware
 app.use(express.json());
-
-// the meal scan enpoint 
-app.use("/meal", foodScan);
-
-// the user authenitication enpoint
-app.use("/user", userAuth);
-
+app.use("/api", authenticateToken);
+app.use("/api/meal", foodScan);
+app.use("/authenticate", authRoute);
 app.listen(PORT, () => {
     console.log(`The server started in http://localhost:${PORT}`);
 })
