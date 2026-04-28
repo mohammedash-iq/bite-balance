@@ -1,11 +1,14 @@
 import express from "express"
+import cors from "cors";
 import foodScan from "./routes/foodScanRoutes.js";
 import authRoute from "./routes/authenticationRoute.js";
 import authenticateToken from "./middleware/jwtMiddleware.js";
+
 const app = express()
 const PORT = 8090;
 
 // middleware
+app.use(cors())
 app.use(express.json());
 app.use("/api", authenticateToken);
 app.use("/api/meal", foodScan);
