@@ -5,6 +5,16 @@ CREATE TABLE IF NOT EXISTS USERS (
     email VARCHAR(255) NOT NULL UNIQUE
 );
 
+CREATE TABLE IF NOT EXISTS user_food_data (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    food_id INTEGER NOT NULL,
+    date_consumed DATE NOT NULL,
+    time_consumed TIME NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES USERS(id),
+    FOREIGN KEY (food_id) REFERENCES food_data(id)
+);
+
 CREATE TABLE IF NOT EXISTS food_data (
     id SERIAL PRIMARY KEY,
     food VARCHAR(255) NOT NULL,
@@ -44,24 +54,26 @@ zinc DECIMAL(10, 2) NOT NULL,
 nutrition_density DECIMAL(10, 2) NOT NULL
 );
 
-COPY food_data 
- FROM '/food-data/FOOD-DATA-GROUP1.csv'
- WITH (FORMAT csv, HEADER true);
+-- only when the tables are created, run the following commands to populate the food_data table with the data from the CSV files. Make sure to adjust the file paths as necessary.
 
- COPY food_data 
- FROM '/food-data/FOOD-DATA-GROUP2.csv'
- WITH (FORMAT csv, HEADER true);
+-- COPY food_data 
+--  FROM '/food-data/FOOD-DATA-GROUP1.csv'
+--  WITH (FORMAT csv, HEADER true);
+
+--  COPY food_data 
+--  FROM '/food-data/FOOD-DATA-GROUP2.csv'
+--  WITH (FORMAT csv, HEADER true);
  
- COPY food_data 
- FROM '/food-data/FOOD-DATA-GROUP3.csv'
- WITH (FORMAT csv, HEADER true);
+--  COPY food_data 
+--  FROM '/food-data/FOOD-DATA-GROUP3.csv'
+--  WITH (FORMAT csv, HEADER true);
  
- COPY food_data 
- FROM '/food-data/FOOD-DATA-GROUP4.csv'
- WITH (FORMAT csv, HEADER true);
+--  COPY food_data 
+--  FROM '/food-data/FOOD-DATA-GROUP4.csv'
+--  WITH (FORMAT csv, HEADER true);
  
- COPY food_data 
- FROM '/food-data/FOOD-DATA-GROUP5.csv'
- WITH (FORMAT csv, HEADER true);
+--  COPY food_data 
+--  FROM '/food-data/FOOD-DATA-GROUP5.csv'
+--  WITH (FORMAT csv, HEADER true);
  
  

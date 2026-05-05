@@ -21,9 +21,6 @@ async function initializeDatabase() {
         client = await pool.connect();
         console.log("Connected to the database successfully!");
         await client.query(sql);
-        console.log('Database initialized successfully!');
-        const res = await client.query("select * from food_data limit 5")
-        console.log(res.rows);
     }
     catch (err) {
         console.error('Error initializing the database:', err.message);
