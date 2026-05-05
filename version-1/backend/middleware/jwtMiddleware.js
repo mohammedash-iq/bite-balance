@@ -10,7 +10,7 @@ function authenticateToken(req, res, next) {
         if (err) {
             return res.status(403).json({ error: "Invalid access token" });
         }
-        req.email = email;
+        req.user_id = user.user_id;
         next();
     });
 }
