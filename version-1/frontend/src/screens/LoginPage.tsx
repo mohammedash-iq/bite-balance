@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { loginApiCall } from "../services/accountsService";
 import { useState } from "react";
-import Navbar from "../components/main-page-component/navbar";
+import Navbar from "../components/main-page-component/Navbar";
 function LoginPage() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" })
@@ -12,6 +12,7 @@ function LoginPage() {
     if (response.ok) {
       localStorage.setItem("token", responseBody.accesstoken)
       alert(responseBody.message)
+      navigate("/dashboard");
     }
     else {
       alert(responseBody.error)

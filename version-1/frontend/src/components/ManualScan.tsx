@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { handleManualMealScan } from "../services/mealService";
 function TextScan() {
-  function handleformSubmit(e) {
+  async function handleformSubmit(e) {
+    e.preventDefault();
     if (formData.meal === '' || formData.portion === '') {
       alert('Please select both meal and portion size');
       return;
     }
-    e.preventDefault();
-    console.log(formData);
+    await handleManualMealScan({ meal: formData.meal, portion: formData.portion });
+    alert(`Submitted: ${formData.meal} - ${formData.portion}`);
   }
   const [formData, setFormData] = useState({ meal: '', portion: '' });
   return (
