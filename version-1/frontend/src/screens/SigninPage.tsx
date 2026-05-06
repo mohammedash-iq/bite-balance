@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { signinApiCall } from "../services/accountsService";
 import { useState } from "react";
-import Navbar from "../components/main-page-component/navbar";
+import Navbar from "../components/landing-page/Navbar";
 
 function SigninPage() {
   const navigate = useNavigate();

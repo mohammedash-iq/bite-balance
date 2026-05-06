@@ -1,5 +1,5 @@
-import Navbar from "../components/main-page-component/navbar";
-function MainPage() {
+import Navbar from "../components/landing-page/Navbar";
+function LandingPage() {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col justify-between">
       <Navbar></Navbar>
@@ -32,4 +32,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default LandingPage;

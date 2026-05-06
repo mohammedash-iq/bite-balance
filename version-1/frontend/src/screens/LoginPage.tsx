@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { loginApiCall } from "../services/accountsService";
 import { useState } from "react";
-import Navbar from "../components/main-page-component/Navbar";
+import Navbar from "../components/landing-page/Navbar";
 function LoginPage() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" })

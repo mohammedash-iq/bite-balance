@@ -1,6 +1,6 @@
 import { useState } from "react";
-import TextScan from "../../components/ManualScan";
-import CameraScan from "../../components/CameraScan";
+import TextScan from "./scan-section/ManualScan";
+import CameraScan from "./scan-section/CameraScan";
 
 const Scan = () => {
   const [activeTab, setActiveTab] = useState("camera");
