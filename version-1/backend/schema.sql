@@ -5,16 +5,6 @@ CREATE TABLE IF NOT EXISTS USERS (
     email VARCHAR(255) NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS user_food_data (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL,
-    food_id INTEGER NOT NULL,
-    date_consumed DATE NOT NULL,
-    time_consumed TIME NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES USERS(id),
-    FOREIGN KEY (food_id) REFERENCES food_data(id)
-);
-
 CREATE TABLE IF NOT EXISTS food_data (
     id SERIAL PRIMARY KEY,
     food VARCHAR(255) NOT NULL,
@@ -76,4 +66,14 @@ nutrition_density DECIMAL(10, 2) NOT NULL
 --  FROM '/food-data/FOOD-DATA-GROUP5.csv'
 --  WITH (FORMAT csv, HEADER true);
  
- 
+
+CREATE TABLE IF NOT EXISTS user_food_data (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    food_id INTEGER NOT NULL,
+    portion varchar(255) NOT NULL,
+    date_consumed DATE NOT NULL default CURRENT_DATE,
+    time_consumed TIME NOT NULL default CURRENT_TIME,
+    FOREIGN KEY (user_id) REFERENCES USERS(id),
+    FOREIGN KEY (food_id) REFERENCES food_data(id)
+);

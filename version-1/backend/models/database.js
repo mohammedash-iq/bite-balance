@@ -29,5 +29,5 @@ async function initializeDatabase() {
         if (client) client.release();
     }
 }
-initializeDatabase().catch(err => console.error('Database initialization failed:', err.message));
+initializeDatabase()
 export default pool;

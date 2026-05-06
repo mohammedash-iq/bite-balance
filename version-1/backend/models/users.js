@@ -14,6 +14,7 @@ async function databaseAddUser({ username, password, email }) {
     }
     catch (err) {
         console.error('Error adding user to the database:', err.message);
+        throw err;
     }
     finally {
         if (client) client.release();

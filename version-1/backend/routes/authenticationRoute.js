@@ -12,7 +12,7 @@ authRoute.post("/signin", async (req, res) => {
         return res.status(400).json({ error: "Username and password are required" });
     }
     const user = await databaseGetUser({ email: email });
-    if (user.email === email) {
+    if (user) {
         return res.status(409).json({ error: "User already exists" });
     }
     const newUser = await databaseAddUser({ email, username, password });
