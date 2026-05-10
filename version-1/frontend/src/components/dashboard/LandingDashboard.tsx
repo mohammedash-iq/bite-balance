@@ -2,24 +2,14 @@ import StatsBar from "./landing-section/StatsBar";
 
 function LandingDashboard() {
   const stats = [
-    { name: "Protein", value: "65g", limit: "100g" },
-    { name: "Calories", value: "1400", limit: "2000 kcal" },
-    { name: "Sugar", value: "30g", limit: "50g" },
+    { name: "Protein", value: 65, limit: 100 },
+    { name: "Calories", value: 1400, limit: 2000 },
+    { name: "Sugar", value: 30, limit: 50 },
   ];
 
   return (
     <div className="min-h-screen max-w-[600px] bg-white p-6 mx-auto">
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex gap-3">
-          <img
-            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex"
-            alt="Profile"
-            className="w-12 h-12 rounded-full bg-green-200 border-4 border-white shadow-md object-cover"
-          />
-          <h1 className="text-2xl mt-2 font-semibold text-green-900">Hello User!</h1>
 
-        </div>
-      </div>
       <div className="text-green-600 font-bold text-[1.5rem] mb-3">Had anything?</div>
       <div className="flex items-center justify-between bg-green-200/40 p-4 rounded-2xl mb-8">
 
