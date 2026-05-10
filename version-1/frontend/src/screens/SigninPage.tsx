@@ -5,14 +5,19 @@ import Navbar from "../components/landing-page/Navbar";
 
 function SigninPage() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ username: "", email: "", password: "" })
+  const [formData, setFormData] = useState({ username: "", email: "", password: "", confirmPassword: "", age: "", height: "", weight: "" });
   async function handleSigninSubmit(e) {
     e.preventDefault();
-    const response = await signinApiCall({ username: formData.username, email: formData.email, password: formData.password });
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+    const response = await signinApiCall({ username: formData.username, email: formData.email, password: formData.password, age: formData.age, height: formData.height, weight: formData.weight });
     const responseBody = await response.json();
     if (response.ok) {
       localStorage.setItem("token", responseBody.accesstoken)
       alert(responseBody.message)
+      navigate("/dashboard")
     }
     else {
       alert(responseBody.error)
@@ -68,11 +73,28 @@ function SigninPage() {
               </label>
               <input
                 type="password"
+                value={formData.confirmPassword}
+                onChange={(e) => { setFormData({ ...formData, confirmPassword: e.target.value }) }}
                 placeholder="••••••••"
                 className="w-full bg-gray-900 border border-gray-800 rounded-md px-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-600"
               />
             </div>
 
+            <div className="flex gap-1">
+              <div>
+                <label htmlFor="age" >Age</label>
+                <input value={formData.age} onChange={(e) => { setFormData({ ...formData, age: e.target.value }) }} type="number" name="age" id="age" required />
+              </div>
+              <div>
+                <label htmlFor="height" >Height</label>
+                <input value={formData.height} onChange={(e) => { setFormData({ ...formData, height: e.target.value }) }} type="number" name="height" id="height" required />
+              </div>
+              <div>
+                <label htmlFor="weight">Weight</label>
+                <input value={formData.weight} onChange={(e) => { setFormData({ ...formData, weight: e.target.value }) }} type="number" name="weight" id="weight" required />
+              </div>
+
+            </div>
             <button
               type="submit"
               className="w-full bg-white text-black py-3 rounded-md font-medium hover:bg-gray-200 transition"

@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+:root {
+  --color-palette-raspberry: #d33f49;
+  --color-palette-thistle: #d7c0d0;
+  --color-palette-beige: #eff0d1;
+  --color-palette-teal: #77ba99;
+  --color-palette-grey: #262730;
+}
+
+.apple-font {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+@theme {
+  --color-palette-raspberry: #d33f49;
+  --color-palette-thistle: #d7c0d0;
+  --color-palette-beige: #eff0d1;
+  --color-palette-teal: #77ba99;
+  --color-palette-grey: #262730;
+}

@@ -19,10 +19,6 @@ function LandingDashboard() {
           <h1 className="text-2xl mt-2 font-semibold text-green-900">Hello User!</h1>
 
         </div>
-
-        <div className="bg-green-200 text-green-900 font-semibold px-4 py-2 border-4 border-white shadow-md rounded-xl ">
-          Day-7 🔥
-        </div>
       </div>
       <div className="text-green-600 font-bold text-[1.5rem] mb-3">Had anything?</div>
       <div className="flex items-center justify-between bg-green-200/40 p-4 rounded-2xl mb-8">

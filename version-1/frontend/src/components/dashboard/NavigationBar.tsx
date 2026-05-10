@@ -5,17 +5,20 @@ import { useNavigate } from "react-router-dom";
 export default function BottomNav() {
   const [active, setActive] = useState(0);
   const navigate = useNavigate();
+
   const navItems = [
-    { icon: <FiHome size={22} />, hrefLink: "/dashboard" },
-    { icon: <FiCamera size={22} />, hrefLink: "/dashboard/scan" },
-    { icon: <FiList size={22} />, hrefLink: "/dashboard/updates" },
-    { icon: <FiUser size={22} />, hrefLink: "/dashboard/profile" },
+    { icon: FiHome, hrefLink: "/dashboard" },
+    { icon: FiCamera, hrefLink: "/dashboard/scan" },
+    { icon: FiList, hrefLink: "/dashboard/updates" },
+    { icon: FiUser, hrefLink: "/dashboard/profile" },
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 w-full flex justify-center pb-4 ">
-      <div className="bg-white/90 rounded-3xl p-2 flex gap-4 border border-gray-200 bg-red-200">
+    <div className="fixed bottom-0 left-0 w-full flex justify-center pb-6">
+      <div className="apple-font bg-palette-beige/95 backdrop-blur-md rounded-[28px] p-2 flex gap-1 shadow-[0_8px_32px_rgba(38,39,48,0.15)] border border-palette-thistle/40">
         {navItems.map((item, index) => {
+          const Icon = item.icon;
+          const isActive = active === index;
           return (
             <button
               key={index}
@@ -23,10 +26,14 @@ export default function BottomNav() {
                 setActive(index);
                 navigate(item.hrefLink);
               }}
-              className={`relative flex flex-col items-center justify-center px-4 py-2 rounded-2xl ${active == index ? "bg-green-200" : ""}`}
+              className={`relative flex flex-col items-center justify-center px-5 py-3 rounded-[18px] transition-all duration-200 active:scale-90
+                ${isActive
+                  ? "bg-palette-teal text-white shadow-[0_2px_12px_rgba(119,186,153,0.35)]"
+                  : "text-palette-grey hover:bg-palette-thistle/30"
+                }
+              `}
             >
-              {" "}
-              {item.icon}
+              <Icon size={22} strokeWidth={isActive ? 2.2 : 1.8} />
             </button>
           );
         })}

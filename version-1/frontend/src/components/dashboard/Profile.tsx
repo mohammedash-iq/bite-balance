@@ -1,54 +1,79 @@
+import { useEffect, useState } from "react";
+import { fetchProfile, fetchProfileHealthMetrics } from "../../services/userService";
 
-import { FiActivity, FiDelete, FiHeart, FiSettings ,FiStar} from 'react-icons/fi';
+function Profile() {
+  const [user, setUser] = useState({});
+  const [healthMetrics, setHealthMetrics] = useState({});
+  useEffect(() => {
 
-const Profile = () => {
-  const user = {
-    name: "Alex River",
-    streak: 12,
-    health: [
-      { label: "Weight", value: "68 kg", icon: <FiDelete className="w-5 h-5" /> },
-      { label: "Daily Steps", value: "8,432", icon: <FiActivity className="w-5 h-5" /> },
-    ]
-  };
+    const loadProfile = async () => {
+      const userData = await fetchProfile();
+      const userHealthMetrics = await fetchProfileHealthMetrics();
+      console.log("Fetched user profile:", userData);
+      console.log("Fetched user health metrics:", userHealthMetrics);
+      setUser(userData.content);
+      setHealthMetrics(userHealthMetrics.content);
+    };
+    loadProfile();
+  }, []);
 
   return (
-    <div className="min-h-screen p-6 max-w-[600px] mx-auto font-sans text-slate-800">
-      <div className="flex justify-between items-center mb-8">
-        <button className="p-2 hover:bg-green-200 rounded-full transition-colors">
-          <FiSettings className="w-6 h-6 text-green-700" />
-        </button>
-      </div>
 
-      <div className="flex flex-col items-center mb-10">
+    <div className="min-h-screen p-6 mb-10 max-w-[600px] mx-auto font-sans text-slate-800">
 
-          <img
-            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex"
-            alt="Profile"
-            className="w-32 h-32 rounded-[3rem] bg-green-200 border-4 border-white shadow-sm object-cover"
-          />
-        <h1 className="mt-6 text-3xl font-semibold text-green-900">{user.name}</h1>
+      <div className="flex flex-col items-center ">
+
+        <img
+          src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex"
+          alt="Profile"
+          className="w-32 h-32 rounded-[3rem] bg-green-200 border-4 border-white shadow-sm object-cover"
+        />
+        <h1 className="mt-6 text-3xl font-semibold text-green-900">{user ? user.username : "Username"}</h1>
+        <h3 className="text-lg text-slate-600">{user ? user.email : "Email"}</h3>
       </div>
       <div className="grid grid-cols-1 gap-4 max-w-md mx-auto">
         <h2 className="text-sm font-bold text-green-800 uppercase tracking-widest ml-2 mb-1">
           Health Metrics
         </h2>
-        
-        {user.health.map((stat, index) => (
-          <div 
-            key={index}
-            className="flex items-center justify-between p-5 bg-green-100 rounded-[2rem] border border-green-200"
-          >
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-green-300 rounded-2xl text-green-700">
-                {stat.icon}
-              </div>
-              <div>
-                <p className="text-sm text-green-700 font-medium">{stat.label}</p>
-                <p className="text-xl font-bold text-green-900">{stat.value}</p>
-              </div>
-            </div>
-          </div>
-        ))}
+        <ul>
+          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
+            <span className="text-sm font-medium text-green-700">Age</span>
+            <span className="text-sm font-semibold text-green-900">{healthMetrics.age}</span>
+          </li>
+          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
+            <span className="text-sm font-medium text-green-700">Weight</span>
+            <span className="text-sm font-semibold text-green-900">{healthMetrics.weight}</span>
+          </li>
+          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
+            <span className="text-sm font-medium text-green-700">Height</span>
+            <span className="text-sm font-semibold text-green-900">{healthMetrics.height}</span>
+          </li>
+          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
+            <span className="text-sm font-medium text-green-700">Daily Protein Goal</span>
+            <span className="text-sm font-semibold text-green-900">{healthMetrics.dailyProteinGoal}</span>
+          </li>
+          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
+            <span className="text-sm font-medium text-green-700">Daily Calorie Goal</span>
+            <span className="text-sm font-semibold text-green-900">{healthMetrics.calorie_goal}</span>
+          </li>
+          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
+            <span className="text-sm font-medium text-green-700">Daily Sugar Goal</span>
+            <span className="text-sm font-semibold text-green-900">{healthMetrics.sugar_goal}</span>
+          </li>
+          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
+            <span className="text-sm font-medium text-green-700">Daily Fat Goal</span>
+            <span className="text-sm font-semibold text-green-900">{healthMetrics.fat_goal}</span>
+          </li>
+          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
+            <span className="text-sm font-medium text-green-700">Daily Fiber Goal</span>
+            <span className="text-sm font-semibold text-green-900">{healthMetrics.fiber_goal}</span>
+          </li>
+          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
+            <span className="text-sm font-medium text-green-700">Daily Water Goal</span>
+            <span className="text-sm font-semibold text-green-900">{healthMetrics.water_goal}</span>
+          </li>
+        </ul>
+
       </div>
     </div>
   );
