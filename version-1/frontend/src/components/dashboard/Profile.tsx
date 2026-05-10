@@ -24,7 +24,7 @@ function Profile() {
       <div className="flex flex-col items-center ">
 
         <img
-          src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex"
+          src={user ? user.image_url : "https://api.dicebear.com/9.x/thumbs/svg?seed=Sophie"}
           alt="Profile"
           className="w-32 h-32 rounded-[3rem] bg-green-200 border-4 border-white shadow-sm object-cover"
         />

@@ -1,12 +1,13 @@
 import pool from './database.js';
+import generateAvatar from "../services/profileGenerator.js"
 
 async function databaseAddUser({ username, password, email }) {
     let client;
     try {
         client = await pool.connect();
         await client.query(
-            `INSERT INTO users (username, password, email) VALUES ($1, $2, $3)`,
-            [username, password, email]
+            `INSERT INTO users (username, password, email,image_url) VALUES ($1, $2, $3,$4)`,
+            [username, password, email, generateAvatar()]
         );
         const res = await client.query(`SELECT id FROM users WHERE email = $1`, [email]);
         console.log('User added to the database successfully!', res.rows[0]);
@@ -44,7 +45,7 @@ async function getProfile({ userId }) {
     try {
         client = await pool.connect();
         const res = await client.query(
-            `SELECT id, username, email FROM users WHERE id = $1`,
+            `SELECT username, email,image_url FROM users WHERE id = $1`,
             [userId]
         );
         return res.rows[0];
