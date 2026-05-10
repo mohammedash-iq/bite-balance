@@ -6,7 +6,7 @@ async function fetchProfileHealthMetrics() {
             "Authorization": `${localStorage.getItem("token")}`,
         },
     });
-    if (response.ok) {
+    if (response.ok) {  
         const data = await response.json();
         return data;
     }

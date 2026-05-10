@@ -10,7 +10,7 @@ function Profile() {
       const userData = await fetchProfile();
       const userHealthMetrics = await fetchProfileHealthMetrics();
       console.log("Fetched user profile:", userData);
-      console.log("Fetched user health metrics:", userHealthMetrics);
+      console.log("fetched user nutri goals", userHealthMetrics)
       setUser(userData.content);
       setHealthMetrics(userHealthMetrics.content);
     };
@@ -38,7 +38,7 @@ function Profile() {
         <ul>
           <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
             <span className="text-sm font-medium text-green-700">Age</span>
-            <span className="text-sm font-semibold text-green-900">{healthMetrics.age}</span>
+            <span className="text-sm font-semibold text-green-900">{healthMetrics.age ? healthMetrics.age : ""}</span>
           </li>
           <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
             <span className="text-sm font-medium text-green-700">Weight</span>
@@ -49,28 +49,28 @@ function Profile() {
             <span className="text-sm font-semibold text-green-900">{healthMetrics.height}</span>
           </li>
           <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700">Daily Protein Goal</span>
-            <span className="text-sm font-semibold text-green-900">{healthMetrics.dailyProteinGoal}</span>
+            <span className="text-sm font-medium text-green-700"> Protein Goal</span>
+            <span className="text-sm font-semibold text-green-900">{healthMetrics.protein_goal}</span>
           </li>
           <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700">Daily Calorie Goal</span>
+            <span className="text-sm font-medium text-green-700"> Calorie Goal</span>
             <span className="text-sm font-semibold text-green-900">{healthMetrics.calorie_goal}</span>
           </li>
           <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700">Daily Sugar Goal</span>
+            <span className="text-sm font-medium text-green-700"> Sugar Goal</span>
             <span className="text-sm font-semibold text-green-900">{healthMetrics.sugar_goal}</span>
           </li>
           <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700">Daily Fat Goal</span>
+            <span className="text-sm font-medium text-green-700"> Fat Goal</span>
             <span className="text-sm font-semibold text-green-900">{healthMetrics.fat_goal}</span>
           </li>
           <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700">Daily Fiber Goal</span>
+            <span className="text-sm font-medium text-green-700"> Fiber Goal</span>
             <span className="text-sm font-semibold text-green-900">{healthMetrics.fiber_goal}</span>
           </li>
           <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700">Daily Water Goal</span>
-            <span className="text-sm font-semibold text-green-900">{healthMetrics.water_goal}</span>
+            <span className="text-sm font-medium text-green-700">Carbs Goal</span>
+            <span className="text-sm font-semibold text-green-900">{healthMetrics.carbs_goal}</span>
           </li>
         </ul>
 

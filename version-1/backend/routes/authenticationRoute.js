@@ -2,14 +2,14 @@ import express from "express";
 import bycrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import generateNutriGoals from "../services/nutriGoalGenerator.js"
-import { databaseAddUser, databaseGetUser, updateUserHealthMetrics } from "../models/users.js";
+import { databaseAddUser, databaseGetUser, updateUserHealthMetrics, updateUserNutriGoals } from "../models/users.js";
 
 const users = [];
 const authRoute = express.Router();
 
 authRoute.post("/signin", async (req, res) => {
     try {
-        const { email, username, password, age, height, weight, gender,activity } = req.body;
+        const { email, username, password, age, height, weight, gender, activity } = req.body;
         if (!email || !username || !password) {
             return res.status(400).json({ error: "Username and password are required" });
         }
@@ -22,11 +22,14 @@ authRoute.post("/signin", async (req, res) => {
         const newUser = await databaseAddUser({ email, username, password });
 
         //creates a new datarow in the user_profile table with relevent data
-        await updateUserHealthMetrics({ userId: newUser.id, age: age, height: height, weight: weight, gender: gender,activity:activity });
+        await updateUserHealthMetrics({ userId: newUser.id, age: age, height: height, weight: weight, gender: gender, activity: activity });
 
         //fetches the best goals for the user based on the health and biological meterics and adds it to the user_profile table
-        const nutriGoals = generateNutriGoals({ age: age, height: height, weight: weight, gender: gender,activity:activity });
-            
+        const nutriGoals = generateNutriGoals({ age: age, height: height, weight: weight, gender: gender, activity: activity });
+        console.log(nutriGoals)
+        await updateUserNutriGoals({ user_id: newUser.id, goals: nutriGoals });
+
+        //sending response back to the user with jwt token
         jwt.sign({ user_id: newUser.id }, "jwt_secret_key", { expiresIn: "1d" }, (err, token) => {
             if (err) {
                 return res.status(500).json({ error: "Error generating token" });
