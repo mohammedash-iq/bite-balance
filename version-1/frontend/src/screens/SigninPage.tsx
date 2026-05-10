@@ -5,14 +5,14 @@ import Navbar from "../components/landing-page/Navbar";
 
 function SigninPage() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ username: "", email: "", password: "", confirmPassword: "", age: "", height: "", weight: "", gender: "male" });
+  const [formData, setFormData] = useState({ username: "", email: "", password: "", confirmPassword: "", age: "", height: "", weight: "", gender: "male", activity: "sedentary" });
   async function handleSigninSubmit(e) {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-    const response = await signinApiCall({ username: formData.username, email: formData.email, password: formData.password, age: formData.age, height: formData.height, weight: formData.weight ,gender:formData.gender});
+    const response = await signinApiCall({ username: formData.username, email: formData.email, password: formData.password, age: formData.age, height: formData.height, weight: formData.weight, gender: formData.gender, activity: formData.activity });
     const responseBody = await response.json();
     if (response.ok) {
       localStorage.setItem("token", responseBody.accesstoken)
@@ -94,12 +94,22 @@ function SigninPage() {
                 <input value={formData.weight} onChange={(e) => { setFormData({ ...formData, weight: e.target.value }) }} type="number" name="weight" id="weight" required />
               </div>
               <div>
-                <label htmlFor="gender"></label>
+                <label htmlFor="gender">Gender</label>
                 <select onChange={(e) => { setFormData({ ...formData, gender: e.target.value }) }} name="gender" id="gender">
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
               </div>
+            </div>
+            <div>
+              <label htmlFor="activity">How active are you</label>
+              <select onChange={(e) => { setFormData({ ...formData, activity: e.target.value }) }} name="activity" id="activity">
+                <option value="sedentary">Lazy</option>
+                <option value="lightly-active">Lightly Active</option>
+                <option value="moderately-active">Moderately Active</option>
+                <option value="very-active">Very Active</option>
+                <option value="extra-active">Extra Active</option>
+              </select>
             </div>
             <button
               type="submit"

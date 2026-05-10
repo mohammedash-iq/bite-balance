@@ -19,7 +19,7 @@ function LandingDashboard() {
       </div>
       <div className="flex flex-col gap-2">
         {stats.map((stat) => (
-          <StatsBar stat={stat}></StatsBar>
+          <StatsBar key={crypto.randomUUID()} stat={stat}></StatsBar>
         ))}
       </div>
     </div>

@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS USERS (
 
 
 CREATE TYPE GENDER AS ENUM ('male', 'female');
+CREATE TYPE ACTIVITY AS ENUM('sedentary','lightly-active','moderately-active','very-active', 'extra-active');
 
 create table if not exists user_profile (
     id SERIAL PRIMARY KEY,
@@ -18,6 +19,7 @@ create table if not exists user_profile (
     weight DECIMAL(5, 2) NOT NULL,
     age INTEGER NOT NULL,
     gender GENDER NOT NULL,
+    activity ACTIVITY NOT NULL,
     calorie_goal DECIMAL(10, 2) ,
     protein_goal DECIMAL(10, 2) ,
     sugar_goal DECIMAL(10, 2) ,
