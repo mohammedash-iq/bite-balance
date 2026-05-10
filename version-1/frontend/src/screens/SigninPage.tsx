@@ -5,14 +5,14 @@ import Navbar from "../components/landing-page/Navbar";
 
 function SigninPage() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ username: "", email: "", password: "", confirmPassword: "", age: "", height: "", weight: "" });
+  const [formData, setFormData] = useState({ username: "", email: "", password: "", confirmPassword: "", age: "", height: "", weight: "", gender: "male" });
   async function handleSigninSubmit(e) {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-    const response = await signinApiCall({ username: formData.username, email: formData.email, password: formData.password, age: formData.age, height: formData.height, weight: formData.weight });
+    const response = await signinApiCall({ username: formData.username, email: formData.email, password: formData.password, age: formData.age, height: formData.height, weight: formData.weight ,gender:formData.gender});
     const responseBody = await response.json();
     if (response.ok) {
       localStorage.setItem("token", responseBody.accesstoken)
@@ -93,7 +93,13 @@ function SigninPage() {
                 <label htmlFor="weight">Weight</label>
                 <input value={formData.weight} onChange={(e) => { setFormData({ ...formData, weight: e.target.value }) }} type="number" name="weight" id="weight" required />
               </div>
-
+              <div>
+                <label htmlFor="gender"></label>
+                <select onChange={(e) => { setFormData({ ...formData, gender: e.target.value }) }} name="gender" id="gender">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
             </div>
             <button
               type="submit"
@@ -110,8 +116,8 @@ function SigninPage() {
                 navigate("/login");
               }}>Log in</button>
           </p>
-        </div>
-      </div>
+        </div >
+      </div >
     </>
   );
 }

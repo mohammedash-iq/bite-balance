@@ -7,7 +7,7 @@ const users = [];
 const authRoute = express.Router();
 
 authRoute.post("/signin", async (req, res) => {
-    const { email, username, password, age, height, weight } = req.body;
+    const { email, username, password, age, height, weight,gender } = req.body;
     if (!email || !username || !password) {
         return res.status(400).json({ error: "Username and password are required" });
     }
@@ -17,7 +17,7 @@ authRoute.post("/signin", async (req, res) => {
     }
     const newUser = await databaseAddUser({ email, username, password });
     console.log(age, height, weight)
-    await updateUserHealthMetrics({ userId: newUser.id, age: age, height: height, weight: weight });
+    await updateUserHealthMetrics({ userId: newUser.id, age: age, height: height, weight: weight ,gender:gender});
 
     jwt.sign({ user_id: newUser.id }, "jwt_secret_key", { expiresIn: "1d" }, (err, token) => {
         if (err) {

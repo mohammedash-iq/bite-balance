@@ -80,14 +80,14 @@ async function getUserHealthMetrics(userId) {
 
 
 
-async function updateUserHealthMetrics({ userId, age, height, weight }) {
+async function updateUserHealthMetrics({ userId, age, height, weight, gender }) {
     let client;
     try {
         client = await pool.connect();
-        console.log("Updating user health metrics:", { userId, age, height, weight });
+        console.log("Updating user health metrics:", { userId, age, height, weight, gender });
         await client.query(
-            `INSERT INTO user_profile (user_id, age, height, weight) VALUES ($1, $2, $3, $4)`,
-            [userId, age, height, weight]
+            `INSERT INTO user_profile (user_id, age, height, weight,gender) VALUES ($1, $2, $3, $4, $5)`,
+            [userId, age, height, weight, gender]
         );
         console.log('User health metrics updated successfully!');
     }

@@ -8,12 +8,16 @@ CREATE TABLE IF NOT EXISTS USERS (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+CREATE TYPE GENDER AS ENUM ('male', 'female');
+
 create table if not exists user_profile (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
     height DECIMAL(5, 2) NOT NULL,
     weight DECIMAL(5, 2) NOT NULL,
     age INTEGER NOT NULL,
+    gender GENDER NOT NULL,
     calorie_goal DECIMAL(10, 2) ,
     protein_goal DECIMAL(10, 2) ,
     sugar_goal DECIMAL(10, 2) ,
@@ -64,25 +68,25 @@ nutrition_density DECIMAL(10, 2) NOT NULL
 
 -- only when the tables are created, run the following commands to populate the food_data table with the data from the CSV files. Make sure to adjust the file paths as necessary.
 
-COPY food_data 
- FROM '/food-data/FOOD-DATA-GROUP1.csv'
- WITH (FORMAT csv, HEADER true);
+-- COPY food_data 
+--  FROM '/food-data/FOOD-DATA-GROUP1.csv'
+--  WITH (FORMAT csv, HEADER true);
 
- COPY food_data 
- FROM '/food-data/FOOD-DATA-GROUP2.csv'
- WITH (FORMAT csv, HEADER true);
+--  COPY food_data 
+--  FROM '/food-data/FOOD-DATA-GROUP2.csv'
+--  WITH (FORMAT csv, HEADER true);
  
- COPY food_data 
- FROM '/food-data/FOOD-DATA-GROUP3.csv'
- WITH (FORMAT csv, HEADER true);
+--  COPY food_data 
+--  FROM '/food-data/FOOD-DATA-GROUP3.csv'
+--  WITH (FORMAT csv, HEADER true);
  
- COPY food_data 
- FROM '/food-data/FOOD-DATA-GROUP4.csv'
- WITH (FORMAT csv, HEADER true);
+--  COPY food_data 
+--  FROM '/food-data/FOOD-DATA-GROUP4.csv'
+--  WITH (FORMAT csv, HEADER true);
  
- COPY food_data 
- FROM '/food-data/FOOD-DATA-GROUP5.csv'
- WITH (FORMAT csv, HEADER true);
+--  COPY food_data 
+--  FROM '/food-data/FOOD-DATA-GROUP5.csv'
+--  WITH (FORMAT csv, HEADER true);
  
 
 CREATE TABLE IF NOT EXISTS user_food_data (
