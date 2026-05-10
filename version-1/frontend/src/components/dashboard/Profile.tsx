@@ -4,13 +4,11 @@ import { fetchProfile, fetchProfileHealthMetrics } from "../../services/userServ
 function Profile() {
   const [user, setUser] = useState({});
   const [healthMetrics, setHealthMetrics] = useState({});
-  useEffect(() => {
 
+  useEffect(() => {
     const loadProfile = async () => {
       const userData = await fetchProfile();
       const userHealthMetrics = await fetchProfileHealthMetrics();
-      console.log("Fetched user profile:", userData);
-      console.log("fetched user nutri goals", userHealthMetrics)
       setUser(userData.content);
       setHealthMetrics(userHealthMetrics.content);
     };
@@ -18,65 +16,66 @@ function Profile() {
   }, []);
 
   return (
-
-    <div className="min-h-screen p-6 mb-10 max-w-[600px] mx-auto font-sans text-slate-800">
-
-      <div className="flex flex-col items-center ">
-
+    <div className="apple-font min-h-screen px-5 py-8 mb-10 max-w-[600px] mx-auto text-palette-grey">
+      <div className="flex flex-col items-center gap-2 mb-8">
         <img
           src={user ? user.image_url : "https://api.dicebear.com/9.x/thumbs/svg?seed=Sophie"}
           alt="Profile"
-          className="w-32 h-32 rounded-[3rem] bg-green-200 border-4 border-white shadow-sm object-cover"
+          className="w-28 h-28 rounded-full bg-palette-thistle border-4 border-white shadow-sm object-cover"
         />
-        <h1 className="mt-6 text-3xl font-semibold text-green-900">{user ? user.username : "Username"}</h1>
-        <h3 className="text-lg text-slate-600">{user ? user.email : "Email"}</h3>
+        <h1 className="mt-3 text-2xl font-semibold tracking-tight text-palette-grey">
+          {user ? user.username : "Username"}
+        </h1>
+        <h3 className="text-sm font-normal text-palette-grey/60">
+          {user ? user.email : "Email"}
+        </h3>
       </div>
-      <div className="grid grid-cols-1 gap-4 max-w-md mx-auto">
-        <h2 className="text-sm font-bold text-green-800 uppercase tracking-widest ml-2 mb-1">
+
+      <div className="grid grid-cols-1 gap-3 max-w-md mx-auto">
+        <h2 className="text-xs font-medium tracking-wide uppercase text-palette-grey/50 ml-1 mb-1">
           Health Metrics
         </h2>
-        <ul>
-          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700">Age</span>
-            <span className="text-sm font-semibold text-green-900">{healthMetrics.age ? healthMetrics.age : ""}</span>
+        <ul className="bg-palette-beige rounded-2xl overflow-hidden shadow-sm">
+          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
+            <span className="text-sm font-normal text-palette-grey/80">Age</span>
+            <span className="text-sm font-semibold text-palette-grey">{healthMetrics.age ? healthMetrics.age : ""}</span>
           </li>
-          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700">Weight</span>
-            <span className="text-sm font-semibold text-green-900">{healthMetrics.weight}</span>
+          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
+            <span className="text-sm font-normal text-palette-grey/80">Weight</span>
+            <span className="text-sm font-semibold text-palette-grey">{healthMetrics.weight}</span>
           </li>
-          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700">Height</span>
-            <span className="text-sm font-semibold text-green-900">{healthMetrics.height}</span>
+          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
+            <span className="text-sm font-normal text-palette-grey/80">Height</span>
+            <span className="text-sm font-semibold text-palette-grey">{healthMetrics.height}</span>
           </li>
-          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700"> Protein Goal</span>
-            <span className="text-sm font-semibold text-green-900">{healthMetrics.protein_goal}</span>
+          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
+            <span className="text-sm font-normal text-palette-grey/80">Protein Goal</span>
+            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.protein_goal}</span>
           </li>
-          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700"> Calorie Goal</span>
-            <span className="text-sm font-semibold text-green-900">{healthMetrics.calorie_goal}</span>
+          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
+            <span className="text-sm font-normal text-palette-grey/80">Calorie Goal</span>
+            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.calorie_goal}</span>
           </li>
-          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700"> Sugar Goal</span>
-            <span className="text-sm font-semibold text-green-900">{healthMetrics.sugar_goal}</span>
+          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
+            <span className="text-sm font-normal text-palette-grey/80">Sugar Goal</span>
+            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.sugar_goal}</span>
           </li>
-          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700"> Fat Goal</span>
-            <span className="text-sm font-semibold text-green-900">{healthMetrics.fat_goal}</span>
+          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
+            <span className="text-sm font-normal text-palette-grey/80">Fat Goal</span>
+            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.fat_goal}</span>
           </li>
-          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700"> Fiber Goal</span>
-            <span className="text-sm font-semibold text-green-900">{healthMetrics.fiber_goal}</span>
+          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
+            <span className="text-sm font-normal text-palette-grey/80">Fiber Goal</span>
+            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.fiber_goal}</span>
           </li>
-          <li className="flex justify-between items-center bg-green-100 rounded-lg px-4 py-3">
-            <span className="text-sm font-medium text-green-700">Carbs Goal</span>
-            <span className="text-sm font-semibold text-green-900">{healthMetrics.carbs_goal}</span>
+          <li className="flex justify-between items-center px-5 py-3.5">
+            <span className="text-sm font-normal text-palette-grey/80">Carbs Goal</span>
+            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.carbs_goal}</span>
           </li>
         </ul>
-
       </div>
     </div>
   );
-};
+}
 
 export default Profile;

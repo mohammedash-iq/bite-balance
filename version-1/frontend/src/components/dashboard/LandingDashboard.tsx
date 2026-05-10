@@ -8,18 +8,20 @@ function LandingDashboard() {
   ];
 
   return (
-    <div className="min-h-screen max-w-[600px] bg-white p-6 mx-auto">
+    <div className="apple-font min-h-screen max-w-[600px] bg-palette-beige px-5 py-8 mx-auto">
+      <h1 className="text-2xl font-semibold tracking-tight text-palette-grey mb-6">
+        Had anything?
+      </h1>
 
-      <div className="text-green-600 font-bold text-[1.5rem] mb-3">Had anything?</div>
-      <div className="flex items-center justify-between bg-green-200/40 p-4 rounded-2xl mb-8">
-
-        <button className="bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-600 transition-colors">
+      <div className="flex items-center justify-between bg-white border border-palette-thistle/60 px-5 py-4 rounded-2xl mb-8 shadow-sm">
+        <button className="bg-palette-raspberry text-white font-semibold px-5 py-2.5 rounded-xl active:scale-95 transition-all duration-150 hover:opacity-90">
           Update
         </button>
       </div>
-      <div className="flex flex-col gap-2">
+
+      <div className="flex flex-col gap-3">
         {stats.map((stat) => (
-          <StatsBar key={crypto.randomUUID()} stat={stat}></StatsBar>
+          <StatsBar key={crypto.randomUUID()} stat={stat} />
         ))}
       </div>
     </div>

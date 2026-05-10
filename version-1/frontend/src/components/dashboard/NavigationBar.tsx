@@ -14,7 +14,7 @@ export default function BottomNav() {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 w-full flex justify-center pb-6">
+    <div className="fixed bottom-0 left-0 w-full flex justify-center pb-2">
       <div className="apple-font bg-palette-beige/95 backdrop-blur-md rounded-[28px] p-2 flex gap-1 shadow-[0_8px_32px_rgba(38,39,48,0.15)] border border-palette-thistle/40">
         {navItems.map((item, index) => {
           const Icon = item.icon;

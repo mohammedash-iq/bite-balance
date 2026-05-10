@@ -6,22 +6,19 @@ import NaviagationBar from "../components/dashboard/NavigationBar";
 import LandingDashboard from "../components/dashboard/LandingDashboard";
 import PageNotFound from "./PageNotFound";
 
-
-
 function DashboardPage() {
   return (
-    <><Routes>
-      <Route path="/" element={<LandingDashboard></LandingDashboard>}></Route>
-      <Route path="/profile" element={<Profile></Profile>}></Route>
-      <Route path="/scan" element={<Scan></Scan>}></Route>
-      <Route path="/updates" element={<Updates></Updates>}></Route>
-      <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
-    </Routes>
-      <NaviagationBar></NaviagationBar>
-    </>
-
-
-  )
+    <div className="apple-font min-h-screen bg-palette-beige text-palette-grey">
+      <Routes>
+        <Route path="/" element={<LandingDashboard />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/scan" element={<Scan />} />
+        <Route path="/updates" element={<Updates />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+      <NaviagationBar />
+    </div>
+  );
 }
 
-export default DashboardPage
+export default DashboardPage;

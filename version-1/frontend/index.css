@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --color-palette-raspberry: #d33f49;
-  --color-palette-thistle: #d7c0d0;
-  --color-palette-beige: #eff0d1;
-  --color-palette-teal: #77ba99;
-  --color-palette-grey: #262730;
+  --color-palette-raspberry: #ff8c93;
+  --color-palette-thistle: #dedede;
+  --color-palette-beige: #dfdfdf;
+  --color-palette-teal: #858585;
+  --color-palette-grey: #323232;
 }
 
 .apple-font {
@@ -15,9 +15,9 @@
 }
 
 @theme {
-  --color-palette-raspberry: #d33f49;
-  --color-palette-thistle: #d7c0d0;
-  --color-palette-beige: #eff0d1;
-  --color-palette-teal: #77ba99;
-  --color-palette-grey: #262730;
+  --color-palette-raspberry: #d3ff47;
+  --color-palette-thistle: #d7f0d0;
+  --color-palette-beige: #ef00d1;
+  --color-palette-teal: #f7ba99;
+  --color-palette-grey: #ffff30;
 }
