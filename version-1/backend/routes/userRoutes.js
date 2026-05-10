@@ -1,5 +1,5 @@
 import express from "express";
-import { getProfile, getUserHealthMetrics } from "../models/users.js"
+import { getProfile, getUserHealthMetrics, getUserTodaysMeals } from "../models/users.js"
 
 const userRoutes = express.Router();
 
@@ -9,9 +9,14 @@ userRoutes.get("/get-profile", async (req, res) => {
 });
 
 userRoutes.get("/get-health-metrics", async (req, res) => {
-    const healthMetrics = await getUserHealthMetrics(req.user_id);
+    const healthMetrics = await getUserHealthMetrics({ userId: req.user_id });
     res.send({ type: "healthMetrics", content: healthMetrics });
 });
+
+userRoutes.get("/get-todays-meals", async (req, res) => {
+    const todaysMeals = await getUserTodaysMeals({ userId: req.user_id });
+    res.send({ type: "todaysMeals", content: todaysMeals });
+})
 
 
 export default userRoutes;

@@ -59,7 +59,7 @@ async function getProfile({ userId }) {
 
 }
 
-async function getUserHealthMetrics(userId) {
+async function getUserHealthMetrics({ userId }) {
     let client;
     try {
         client = await pool.connect();
@@ -114,6 +114,21 @@ async function updateUserHealthMetrics({ userId, age, height, weight, gender, ac
         if (client) { client.release(); }
     }
 }
+async function getUserTodaysMeals({ userId }) {
+    let client;
+    try {
+        client = await pool.connect()
+        const res = await client.query(`SELECT e.time_consumed, e.portion,d.food,d.calorie FROM user_food_data e INNER JOIN food_data d ON e.food_id = d.id  WHERE e.user_id=$1`, [userId])
+        return res.rows
+    }
+    catch (err) {
+        console.log(err);
+    }
+    finally {
+        if (client) { client.release() }
+    }
+
+}
 
 
-export { databaseAddUser, databaseGetUser, getProfile, updateUserHealthMetrics, getUserHealthMetrics, updateUserNutriGoals };
+export { databaseAddUser, databaseGetUser, getProfile, updateUserHealthMetrics, getUserHealthMetrics, updateUserNutriGoals, getUserTodaysMeals };

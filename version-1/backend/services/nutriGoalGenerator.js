@@ -3,7 +3,7 @@
 function generateNutriGoals({ age, height, weight, gender, activity }) {
     const goals = { bmr: 0, tdee: 0, protein: 0, fat: 0, carbs: 0, sugar: 0, fiber: 0 }
 
-    const activityLevel = { "sedentary": 1.2, "lighty-active": 1.375, "moderately-active": 1.55, "very-active": 1.725, "extra-active": 1.9 };
+    const activityLevel = { "sedentary": 1.2, "lightly-active": 1.375, "moderately-active": 1.55, "very-active": 1.725, "extra-active": 1.9 };
 
     if (activity === "sedentary" || activity === "lightly-active") {
         goals.protein = 0.8 * weight;

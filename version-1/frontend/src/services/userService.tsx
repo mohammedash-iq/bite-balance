@@ -6,7 +6,7 @@ async function fetchProfileHealthMetrics() {
             "Authorization": `${localStorage.getItem("token")}`,
         },
     });
-    if (response.ok) {  
+    if (response.ok) {
         const data = await response.json();
         return data;
     }
@@ -24,4 +24,17 @@ async function fetchProfile() {
     }
 };
 
-export { fetchProfile, fetchProfileHealthMetrics };
+async function fetchTodaysMeals() {
+
+    const response = await fetch("http://localhost:8090/api/users/get-todays-meals", {
+        headers: {
+            "Authorization": `${localStorage.getItem("token")}`
+        },
+    })
+    if (response.ok) {
+        const data = await response.json()
+        return data.content;
+    }
+}
+
+export { fetchProfile, fetchProfileHealthMetrics, fetchTodaysMeals };
