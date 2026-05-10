@@ -1,12 +1,13 @@
 import pool from "./database.js";
 
-async function adduserFoodData({ userId, foodId, meal, portion }) {
+async function adduserFoodData({ userId, foodId, portion }) {
+    console.log("Adding user food data:", { userId, foodId, portion });
     let client;
     try {
         client = await pool.connect();
         await client.query(
-            `INSERT INTO user_food_data (user_id, food_id, quantity, meal_type, date) VALUES ($1, $2, $3, $4)`,
-            [userId, foodId, meal, portion]
+            `INSERT INTO user_food_data (user_id, food_id, portion) VALUES ($1, $2, $3)`,
+            [userId, foodId, portion]
         );
         console.log('User food data added to the database successfully!');
     }

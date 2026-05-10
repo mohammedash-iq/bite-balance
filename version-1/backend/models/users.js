@@ -8,9 +8,9 @@ async function databaseAddUser({ username, password, email }) {
             `INSERT INTO users (username, password, email) VALUES ($1, $2, $3)`,
             [username, password, email]
         );
-
-        console.log('User added to the database successfully!');
-        return { id: client.lastID };
+        const res = await client.query(`SELECT id FROM users WHERE email = $1`, [email]);
+        console.log('User added to the database successfully!', res.rows[0]);
+        return { id: res.rows[0].id };
     }
     catch (err) {
         console.error('Error adding user to the database:', err.message);
@@ -35,8 +35,69 @@ async function databaseGetUser({ email }) {
         console.error('Error retrieving user from the database:', err.message);
     }
     finally {
-        client.release();
+        if (client) { client.release(); }
     }
 }
 
-export { databaseAddUser, databaseGetUser };
+async function getProfile({ userId }) {
+    let client;
+    try {
+        client = await pool.connect();
+        const res = await client.query(
+            `SELECT id, username, email FROM users WHERE id = $1`,
+            [userId]
+        );
+        return res.rows[0];
+    }
+    catch (err) {
+        console.error('Error retrieving user profile from the database:', err.message);
+    }
+    finally {
+        if (client) client.release();
+    }
+
+}
+
+async function getUserHealthMetrics(userId) {
+    let client;
+    try {
+        client = await pool.connect();
+        const res = await client.query(
+            `SELECT age, height, weight FROM user_profile WHERE user_id = $1`,
+            [userId]
+        );
+        return res.rows[0];
+    }
+    catch (err) {
+        console.error('Error retrieving user health metrics from the database:', err.message);
+    }
+    finally {
+        if (client) { client.release(); }
+    }
+}
+
+
+
+
+async function updateUserHealthMetrics({ userId, age, height, weight }) {
+    let client;
+    try {
+        client = await pool.connect();
+        console.log("Updating user health metrics:", { userId, age, height, weight });
+        await client.query(
+            `INSERT INTO user_profile (user_id, age, height, weight) VALUES ($1, $2, $3, $4)`,
+            [userId, age, height, weight]
+        );
+        console.log('User health metrics updated successfully!');
+    }
+    catch (err) {
+        console.error('Error updating user health metrics in the database:', err);
+        throw err;
+    }
+    finally {
+        if (client) client.release();
+    }
+}
+
+
+export { databaseAddUser, databaseGetUser, getProfile, updateUserHealthMetrics, getUserHealthMetrics };

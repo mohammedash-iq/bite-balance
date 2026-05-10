@@ -1,8 +1,26 @@
 CREATE TABLE IF NOT EXISTS USERS (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(255) NOT NULL UNIQUE,
+    username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE
+    image_url VARCHAR(255) ,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+create table if not exists user_profile (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    height DECIMAL(5, 2) NOT NULL,
+    weight DECIMAL(5, 2) NOT NULL,
+    age INTEGER NOT NULL,
+    calorie_goal DECIMAL(10, 2) ,
+    protein_goal DECIMAL(10, 2) ,
+    sugar_goal DECIMAL(10, 2) ,
+    fat_goal DECIMAL(10, 2) ,
+    fiber_goal DECIMAL(10, 2) ,
+    water_goal DECIMAL(10, 2) ,
+    FOREIGN KEY (user_id) REFERENCES USERS(id)
 );
 
 CREATE TABLE IF NOT EXISTS food_data (

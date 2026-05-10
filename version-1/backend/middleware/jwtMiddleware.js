@@ -11,6 +11,7 @@ function authenticateToken(req, res, next) {
             return res.status(403).json({ error: "Invalid access token" });
         }
         req.user_id = user.user_id;
+        console.log("Authenticated user ID:", req.user_id);
         next();
     });
 }
