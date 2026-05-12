@@ -10,7 +10,7 @@ async function databaseAddUser({ username, password, email }) {
             [username, password, email, generateAvatar()]
         );
         const res = await client.query(`SELECT id FROM users WHERE email = $1`, [email]);
-        console.log('User added to the database successfully!', res.rows[0]);
+        console.log('User added to the database successfully!');
         return { id: res.rows[0].id };
     }
     catch (err) {
@@ -64,7 +64,7 @@ async function getUserHealthMetrics({ userId }) {
     try {
         client = await pool.connect();
         const res = await client.query(
-            `SELECT age, height, weight,calorie_goal,protein_goal,fat_goal,fiber_goal,sugar_goal,carbs_goal FROM user_profile WHERE user_id = $1`,
+            `SELECT age, height, weight,calorie_goal as calorie,protein_goal as protein,fat_goal as fat,fiber_goal as fiber,sugar_goal as sugar,carbs_goal as carbohydrates FROM user_profile WHERE user_id = $1`,
             [userId]
         );
         return res.rows[0];
@@ -130,5 +130,20 @@ async function getUserTodaysMeals({ userId }) {
 
 }
 
+async function getUserTodaysNutritions({ userId }) {
+    let client;
+    try {
+        client = await pool.connect();
+        const todaysNutritions = await client.query(`SELECT COALESCE (SUM(d.sugar),0)as sugar,SUM(d.calorie) as calorie,SUM(d.fat) as fat,SUM(d.protein) as protein, SUM(d.fiber) as fiber,SUM(d.carbohydrates) as carbohydrates FROM user_food_data e INNER JOIN food_data d ON e.food_id = d.id  WHERE e.user_id=$1`, [userId]);
+        return todaysNutritions.rows;
+    }
+    catch (err) {
+        console.log("Error occurrd getting user todays Nutrition", err);
+    }
+    finally {
+        if (client) { client.release(); }
+    }
+}
 
-export { databaseAddUser, databaseGetUser, getProfile, updateUserHealthMetrics, getUserHealthMetrics, updateUserNutriGoals, getUserTodaysMeals };
+
+export { databaseAddUser, databaseGetUser, getProfile, updateUserHealthMetrics, getUserHealthMetrics, updateUserNutriGoals, getUserTodaysMeals, getUserTodaysNutritions };

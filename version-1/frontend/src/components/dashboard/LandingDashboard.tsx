@@ -1,11 +1,20 @@
+import { useEffect, useState } from "react";
 import StatsBar from "./landing-section/StatsBar";
+import { fetchTodaysNutritions, fetchProfileHealthMetrics } from "../../services/userService"
 
 function LandingDashboard() {
-  const stats = [
-    { name: "Protein", value: 65, limit: 100 },
-    { name: "Calories", value: 1400, limit: 2000 },
-    { name: "Sugar", value: 30, limit: 50 },
-  ];
+
+  const [nutritionValues, setNutritionValues] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const todaysNutrition = await fetchTodaysNutritions();
+      const userHealthMetrics = await fetchProfileHealthMetrics();
+      const result = addvalues({ "consumption": todaysNutrition, "targets": userHealthMetrics })
+      console.log(result)
+      setNutritionValues(result)
+    }
+    fetchData();
+  }, [])
 
   return (
     <div className="apple-font min-h-screen max-w-[600px] bg-palette-beige px-5 py-8 mx-auto">
@@ -20,12 +29,21 @@ function LandingDashboard() {
       </div>
 
       <div className="flex flex-col gap-3">
-        {stats.map((stat) => (
-          <StatsBar key={crypto.randomUUID()} stat={stat} />
-        ))}
+        {nutritionValues && nutritionValues.map((item, index) => (
+          <StatsBar key={index} nutrition={item.nutrient} consumed={Number(item.consumed)} target={Number(item.target)} />
+        )) || <h2>Couldn't fethc data</h2>}
       </div>
     </div>
   );
+}
+
+function addvalues({ consumption, targets }) {
+  const result = consumption.map(([nutrientName, consumedValue]) => ({
+    nutrient: nutrientName,
+    consumed: consumedValue,
+    target: targets[nutrientName] ?? 0
+  }));
+  return result;
 }
 
 export default LandingDashboard;

@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/landing-page/Navbar";
 function LandingPage() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-black text-white flex flex-col justify-between">
       <Navbar></Navbar>
@@ -15,20 +17,20 @@ function LandingPage() {
         </p>
 
         <div className="mt-8 flex space-x-4">
-          <button className="bg-white text-black px-6 py-3 rounded-md font-medium hover:bg-gray-200 transition">
+          <button onClick={() => { navigate("/signin") }} className="bg-white text-black px-6 py-3 rounded-md font-medium hover:bg-gray-200 transition">
             Get Started
           </button>
           <button className="border border-gray-700 px-6 py-3 rounded-md text-gray-300 hover:text-white hover:border-gray-500 transition">
             Learn More
           </button>
         </div>
-      </main>
+      </main >
 
       {/* Footer */}
-      <footer className="text-center text-gray-500 text-sm py-6 border-t border-gray-800">
-        © {new Date().getFullYear()} NutriTrack. All rights reserved.
-      </footer>
-    </div>
+      < footer className="text-center text-gray-500 text-sm py-6 border-t border-gray-800" >
+        © {new Date().getFullYear()} NutriTrack.All rights reserved.
+      </footer >
+    </div >
   );
 }
 

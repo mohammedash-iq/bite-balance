@@ -9,8 +9,8 @@ function Profile() {
     const loadProfile = async () => {
       const userData = await fetchProfile();
       const userHealthMetrics = await fetchProfileHealthMetrics();
-      setUser(userData.content);
-      setHealthMetrics(userHealthMetrics.content);
+      setUser(userData);
+      setHealthMetrics(userHealthMetrics);
     };
     loadProfile();
   }, []);
@@ -50,27 +50,27 @@ function Profile() {
           </li>
           <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
             <span className="text-sm font-normal text-palette-grey/80">Protein Goal</span>
-            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.protein_goal}</span>
+            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.protein}</span>
           </li>
           <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
             <span className="text-sm font-normal text-palette-grey/80">Calorie Goal</span>
-            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.calorie_goal}</span>
+            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.calorie}</span>
           </li>
           <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
             <span className="text-sm font-normal text-palette-grey/80">Sugar Goal</span>
-            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.sugar_goal}</span>
+            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.sugar}</span>
           </li>
           <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
             <span className="text-sm font-normal text-palette-grey/80">Fat Goal</span>
-            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.fat_goal}</span>
+            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.fat}</span>
           </li>
           <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
             <span className="text-sm font-normal text-palette-grey/80">Fiber Goal</span>
-            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.fiber_goal}</span>
+            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.fiber}</span>
           </li>
           <li className="flex justify-between items-center px-5 py-3.5">
             <span className="text-sm font-normal text-palette-grey/80">Carbs Goal</span>
-            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.carbs_goal}</span>
+            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.carbohydrates}</span>
           </li>
         </ul>
       </div>

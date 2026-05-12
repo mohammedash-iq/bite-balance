@@ -8,7 +8,7 @@ async function fetchProfileHealthMetrics() {
     });
     if (response.ok) {
         const data = await response.json();
-        return data;
+        return data.content;
     }
 };
 
@@ -20,7 +20,7 @@ async function fetchProfile() {
     });
     if (response.ok) {
         const data = await response.json();
-        return data;
+        return data.content;
     }
 };
 
@@ -37,4 +37,16 @@ async function fetchTodaysMeals() {
     }
 }
 
-export { fetchProfile, fetchProfileHealthMetrics, fetchTodaysMeals };
+async function fetchTodaysNutritions() {
+    const response = await fetch("http://localhost:8090/api/users/get-todays-nutritions", {
+        headers: {
+            "Authorization": `${localStorage.getItem("token")}`
+        },
+    })
+    if (response.ok) {
+        const data = await response.json()
+        return data.content;
+    }
+}
+
+export { fetchProfile, fetchProfileHealthMetrics, fetchTodaysMeals, fetchTodaysNutritions };
