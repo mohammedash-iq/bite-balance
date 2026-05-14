@@ -14,9 +14,25 @@ async function handleManualMealScan({ meal, portion }) {
         return { success: false, message: "Failed to submit meal scan" };
     }
     return { success: true, message: "Meal scan submitted successfully" };
-
 }
 
+async function handleImageScanMeal({ image }) {
+    console.log("this is in hanle ", image)
+    const response = await fetch("http://localhost:8090/api/meals/image-scan", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `${token}`
+        },
+        body: JSON.stringify({ image: image }),
+    });
+    if (!response.ok) {
+        console.error("Failed to submit meal scan:", response.status, response.statusText);
+        return { success: false, message: "Failed to submit meal scan" };
+    }
+    const data = response.json;
+    return data;
+}
 
 async function fetchOptions(query) {
     const response = await fetch("http://localhost:8090/api/meals/food-options",
@@ -37,4 +53,4 @@ async function fetchOptions(query) {
     return data.foodOptions || [];
 }
 
-export { handleManualMealScan, fetchOptions };
+export { handleManualMealScan, fetchOptions, handleImageScanMeal };

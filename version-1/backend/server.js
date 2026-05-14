@@ -1,5 +1,6 @@
 import express from "express"
 import cors from "cors";
+import dotenv from "dotenv"
 import foodScan from "./routes/foodScanRoutes.js";
 import authRoute from "./routes/authenticationRoute.js";
 import authenticateToken from "./middleware/jwtMiddleware.js";
@@ -11,6 +12,7 @@ const PORT = 8090;
 // middleware
 app.use(cors())
 app.use(express.json());
+dotenv.config();
 
 //routes
 app.use("/api", authenticateToken);

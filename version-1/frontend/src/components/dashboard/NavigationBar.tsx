@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { FiHome, FiUser, FiList, FiCamera } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function BottomNav() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(useLocation().pathname);
   const navigate = useNavigate();
+
 
   const navItems = [
     { icon: FiHome, hrefLink: "/dashboard" },
@@ -18,12 +19,12 @@ export default function BottomNav() {
       <div className="apple-font bg-palette-beige/95 backdrop-blur-md rounded-[28px] p-2 flex gap-1 shadow-[0_8px_32px_rgba(38,39,48,0.15)] border border-palette-thistle/40">
         {navItems.map((item, index) => {
           const Icon = item.icon;
-          const isActive = active === index;
+          const isActive = active === item.hrefLink;
           return (
             <button
               key={index}
               onClick={() => {
-                setActive(index);
+                setActive(item.hrefLink);
                 navigate(item.hrefLink);
               }}
               className={`relative flex flex-col items-center justify-center px-5 py-3 rounded-[18px] transition-all duration-200 active:scale-90
