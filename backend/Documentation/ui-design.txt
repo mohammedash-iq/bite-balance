@@ -1,8 +1,0 @@
-Beige #EFF0D1 → card background
-Shadow Grey #262730 → text
-Thistle #D7C0D0 → borders & inputs
-Muted Teal #77BA99 → primary button & focus
-Raspberry #D33F49 → hover accent
-
-used dicebear for avatar generation for the accounts
-

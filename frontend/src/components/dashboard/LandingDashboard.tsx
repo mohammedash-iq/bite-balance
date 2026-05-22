@@ -12,7 +12,6 @@ function LandingDashboard() {
       const todaysNutrition = await fetchTodaysNutritions();
       const userHealthMetrics = await fetchProfileHealthMetrics();
       const result = addvalues({ consumption: todaysNutrition, targets: userHealthMetrics });
-      console.log(result);
       setNutritionValues(result);
     };
     fetchData();

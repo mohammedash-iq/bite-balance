@@ -4,7 +4,7 @@ import Scan from "../components/dashboard/Scan";
 import Updates from "../components/dashboard/Updates";
 import LandingDashboard from "../components/dashboard/LandingDashboard";
 import PageNotFound from "./PageNotFound";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiHome, FiUser, FiList, FiCamera } from "react-icons/fi";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -26,7 +26,6 @@ function DashboardPage() {
 function NavigationBar() {
   const [active, setActive] = useState(useLocation().pathname);
   const navigate = useNavigate();
-
   const navItems = [
     { icon: FiHome, hrefLink: "/dashboard" },
     { icon: FiCamera, hrefLink: "/dashboard/scan" },
