@@ -1,22 +1,23 @@
 import { useState } from "react";
 import TextScan from "./scan-section/ManualScan";
 import CameraScan from "./scan-section/CameraScan";
+import RecentMeals from "./scan-section/RecentMeals"
 
 const Scan = () => {
-  const [activeTab, setActiveTab] = useState("camera");
+  const [activeTab, setActiveTab] = useState("recent");
 
   return (
     <div className="apple-font min-h-screen flex flex-col items-center p-6 bg-palette-beige">
 
       <main className="w-full max-w-md mt-20 flex-grow flex items-center justify-center">
-        {activeTab === "camera" ? <CameraScan /> : <TextScan />}
+        {activeTab === "camera" ? <CameraScan /> : activeTab === "manual" ? <TextScan /> : <RecentMeals />}
       </main>
-
-      {/* Segmented control */}
       <nav className="mb-18 bg-palette-thistle/30 rounded-[18px] p-1 flex gap-1 border border-palette-thistle/40 shadow-[0_4px_16px_rgba(38,39,48,0.08)]">
         {[
+          { label: "Recent", value: "recent" },
+          { label: "Manual", value: "manual" },
           { label: "Camera", value: "camera" },
-          { label: "Manual", value: "form" },
+
         ].map((tab) => {
           const isActive = activeTab === tab.value;
           return (

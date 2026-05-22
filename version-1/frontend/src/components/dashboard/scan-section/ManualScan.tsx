@@ -2,26 +2,27 @@ import { useState, useEffect } from "react";
 import { handleManualMealScan, fetchOptions } from "../../../services/mealService";
 
 function TextScan() {
-  const [formData, setFormData] = useState({ portion: "" });
-  const [selected, setSelected] = useState("");
+  const [portion, setPortion] = useState("Full");
+  const [mealName, setMealName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   async function handleformSubmit(e) {
     e.preventDefault();
-    if (selected === "" || formData.portion === "") {
+    if (mealName === "" || portion === "") {
       alert("Please select both meal and portion size");
       return;
     }
     setIsSubmitting(true);
-    const result = await handleManualMealScan({
-      meal: selected,
-      portion: formData.portion,
+    await handleManualMealScan({
+      meal: mealName,
+      portion: portion,
     });
     setIsSubmitting(false);
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 2000);
   }
+  const portionOptions = ["Quater", "Half", "Full", "Double"]
 
   return (
     <div className="w-full p-8 rounded-[28px] bg-palette-beige shadow-[0_8px_32px_rgba(38,39,48,0.10)]">
@@ -37,32 +38,18 @@ function TextScan() {
       </div>
 
       <form onSubmit={handleformSubmit} className="space-y-3">
-        {/* Food search */}
-        <MultiSelectSearch setSelected={setSelected} />
-
-        {/* Portion select */}
-        <div className="relative">
-          <select
-            onChange={(e) => setFormData({ ...formData, portion: e.target.value })}
-            required
-            className="apple-font w-full px-4 py-[15px] pr-10 rounded-[14px] bg-white border border-palette-thistle text-[15px] text-palette-grey appearance-none outline-none transition-all duration-200 focus:border-palette-teal focus:ring-2 focus:ring-palette-teal/20"
-          >
-            <option value="">Portion size</option>
-            <option value="extra large">Quarter</option>
-            <option value="large">Half</option>
-            <option value="Medium">Full</option>
-            <option value="small">Double</option>
-          </select>
-          {/* Chevron */}
-          <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-palette-thistle">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.8"
-                strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
+        <MultiSelectSearch setMealName={setMealName} />
+        <div className="flex gap-2 justify-center">
+          {portionOptions.map((item, index) => <div key={index} className={item == portion ? "bg-green-200" : "bg-gray-100"} onClick={(e) => setPortion(e.target.innerText)}>{item}</div>)}
         </div>
 
-        {/* Submit button */}
+        <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-palette-thistle">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.8"
+              strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+
         <button
           type="submit"
           disabled={isSubmitting}
@@ -96,7 +83,7 @@ function TextScan() {
   );
 }
 
-function MultiSelectSearch({ setSelected }) {
+function MultiSelectSearch({ setMealName }) {
   const [query, setQuery] = useState("");
   const [options, setOptions] = useState([]);
   const [currentSelection, setCurrentSelection] = useState("");
@@ -112,15 +99,12 @@ function MultiSelectSearch({ setSelected }) {
     }, 500);
     return () => clearTimeout(timeout);
   }, [query]);
-
   async function updateOptions(query) {
     const fetchedOptions = await fetchOptions(query);
     setOptions(fetchedOptions);
   }
-
   return (
     <div className="relative w-full">
-      {/* Search input wrapper */}
       <div
         className={`flex items-center gap-3 px-4 py-[15px] rounded-[14px] bg-white border transition-all duration-200
           ${isFocused ? "border-palette-teal ring-2 ring-palette-teal/20" : "border-palette-thistle"}
@@ -163,7 +147,7 @@ function MultiSelectSearch({ setSelected }) {
             <li
               key={item.id}
               onClick={() => {
-                setSelected(item.id);
+                setMealName(item.id);
                 setCurrentSelection(item.food);
                 setOptions([]);
               }}
