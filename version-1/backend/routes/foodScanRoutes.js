@@ -1,13 +1,19 @@
 import express from "express"
 import { getFoodOptions } from "../models/food.js"
-import { adduserFoodData } from "../models/userFoodData.js";
+import { adduserFoodData, updateNewScannedMeal } from "../models/userFoodData.js";
 import handleAiImageScan from "../services/imageScanAi.js"
 const foodScan = express.Router()
 
 foodScan.post("/image-scan", async (req, res) => {
     const image = req.body.image;
     const response = await handleAiImageScan({ image: image })
-    res.send({ type: "image", image: response })
+    if (response.success === true) {
+        updateNewScannedMeal({ userId: req.user_id, details: response.details })
+        res.send({ type: "success", message: "food added successfully", details: response.details })
+    }
+    else {
+        res.send({ type: "error", success: false, error: response.error })
+    }
 })
 foodScan.post("/manual-scan", async (req, res) => {
     await adduserFoodData({ userId: req.user_id, foodId: req.body.meal, portion: req.body.portion });

@@ -1,103 +1,103 @@
--- CREATE TABLE IF NOT EXISTS USERS (
---     id SERIAL PRIMARY KEY,
---     username VARCHAR(255) NOT NULL,
---     password VARCHAR(255) NOT NULL,
---     image_url VARCHAR(255) ,
---     email VARCHAR(255) NOT NULL UNIQUE,
---     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
--- );
+CREATE TABLE IF NOT EXISTS USERS (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    image_url VARCHAR(255) ,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 
--- CREATE TYPE GENDER AS ENUM ('male', 'female');
--- CREATE TYPE ACTIVITY AS ENUM('sedentary','lightly-active','moderately-active','very-active', 'extra-active');
+CREATE TYPE GENDER AS ENUM ('male', 'female');
+CREATE TYPE ACTIVITY AS ENUM('sedentary','lightly-active','moderately-active','very-active', 'extra-active');
 
--- create table if not exists user_profile (
---     id SERIAL PRIMARY KEY,
---     user_id INTEGER NOT NULL,
---     height DECIMAL(5, 2) NOT NULL,
---     weight DECIMAL(5, 2) NOT NULL,
---     age INTEGER NOT NULL,
---     gender GENDER NOT NULL,
---     activity ACTIVITY NOT NULL,
---     calorie_goal DECIMAL(10, 2) ,
---     protein_goal DECIMAL(10, 2) ,
---     sugar_goal DECIMAL(10, 2) ,
---     fat_goal DECIMAL(10, 2) ,
---     fiber_goal DECIMAL(10, 2) ,
---     carbs_goal  DECIMAL(10,2),
---     FOREIGN KEY (user_id) REFERENCES USERS(id)
--- );
+create table if not exists user_profile (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    height DECIMAL(5, 2) NOT NULL,
+    weight DECIMAL(5, 2) NOT NULL,
+    age INTEGER NOT NULL,
+    gender GENDER NOT NULL,
+    activity ACTIVITY NOT NULL,
+    calorie_goal DECIMAL(10, 2) ,
+    protein_goal DECIMAL(10, 2) ,
+    sugar_goal DECIMAL(10, 2) ,
+    fat_goal DECIMAL(10, 2) ,
+    fiber_goal DECIMAL(10, 2) ,
+    carbs_goal  DECIMAL(10,2),
+    FOREIGN KEY (user_id) REFERENCES USERS(id)
+);
 
--- CREATE TABLE IF NOT EXISTS food_data (
---     id SERIAL PRIMARY KEY,
---     food VARCHAR(255) NOT NULL,
---     calorie DECIMAL(10, 2) NOT NULL,
---     fat DECIMAL(10, 2) NOT NULL,
---     saturated_fat DECIMAL(10, 2) NOT NULL,
---     monounstaturated_fat DECIMAL(10, 2) NOT NULL,
---     polyunsaturated_fat DECIMAL(10, 2) NOT NULL,
---     carbohydrates DECIMAL(10, 2) NOT NULL,
---     sugar DECIMAL(10, 2) NOT NULL,
---     protein DECIMAL(10, 2) NOT NULL,
---     fiber DECIMAL(10, 2) NOT NULL,
---     cholesterol DECIMAL(10, 2) NOT NULL,
---     sodium DECIMAL(10, 2) NOT NULL,
---     water DECIMAL(10, 2) NOT NULL,
---     vitamin_a DECIMAL(10, 2) NOT NULL,
---     vitamin_b1 DECIMAL(10, 2) NOT NULL,
---     vitamin_b11 DECIMAL(10, 2) NOT NULL,
---     vitamin_b12 DECIMAL(10, 2) NOT NULL,
--- vitamin_b2 DECIMAL(10, 2) NOT NULL,
--- vitamin_b3 DECIMAL(10, 2) NOT NULL,
--- vitamin_b5 DECIMAL(10, 2) NOT NULL,
--- vitamin_b6 DECIMAL(10, 2) NOT NULL,
--- vitamin_c DECIMAL(10, 2) NOT NULL,
--- vitamin_d DECIMAL(10, 2) NOT NULL,
--- vitamin_e DECIMAL(10, 2) NOT NULL,
--- vitamin_k DECIMAL(10, 2) NOT NULL,
--- calcium DECIMAL(10, 2) NOT NULL,
--- copper DECIMAL(10, 2) NOT NULL,
--- iron DECIMAL(10, 2) NOT NULL,
--- magnesium DECIMAL(10, 2) NOT NULL,
--- manganese DECIMAL(10, 2) NOT NULL,
--- phosphorus DECIMAL(10, 2) NOT NULL,
--- potassium DECIMAL(10, 2) NOT NULL,
--- selenium DECIMAL(10, 2) NOT NULL,
--- zinc DECIMAL(10, 2) NOT NULL,
--- nutrition_density DECIMAL(10, 2) NOT NULL
--- );
+CREATE TABLE IF NOT EXISTS food_data (
+    id SERIAL PRIMARY KEY,
+    food VARCHAR(255) NOT NULL,
+    calorie DECIMAL(10, 2) NOT NULL,
+    fat DECIMAL(10, 2) NOT NULL,
+    saturated_fat DECIMAL(10, 2),
+    monounstaturated_fat DECIMAL(10, 2) ,
+    polyunsaturated_fat DECIMAL(10, 2) ,
+    carbohydrates DECIMAL(10, 2) ,
+    sugar DECIMAL(10, 2) NOT NULL,
+    protein DECIMAL(10, 2) NOT NULL,
+    fiber DECIMAL(10, 2) NOT NULL,
+    cholesterol DECIMAL(10, 2),
+    sodium DECIMAL(10, 2) ,
+    water DECIMAL(10, 2) ,
+    vitamin_a DECIMAL(10, 2) ,
+    vitamin_b1 DECIMAL(10, 2) ,
+    vitamin_b11 DECIMAL(10, 2) ,
+    vitamin_b12 DECIMAL(10, 2) ,
+vitamin_b2 DECIMAL(10, 2) ,
+vitamin_b3 DECIMAL(10, 2) ,
+vitamin_b5 DECIMAL(10, 2) ,
+vitamin_b6 DECIMAL(10, 2) ,
+vitamin_c DECIMAL(10, 2) ,
+vitamin_d DECIMAL(10, 2) ,
+vitamin_e DECIMAL(10, 2) ,
+vitamin_k DECIMAL(10, 2) ,
+calcium DECIMAL(10, 2),
+copper DECIMAL(10, 2) ,
+iron DECIMAL(10, 2) ,
+magnesium DECIMAL(10, 2) ,
+manganese DECIMAL(10, 2) ,
+phosphorus DECIMAL(10, 2),
+potassium DECIMAL(10, 2) ,
+selenium DECIMAL(10, 2) ,
+zinc DECIMAL(10, 2) ,
+nutrition_density DECIMAL(10, 2) 
+);
 
--- -- only when the tables are created, run the following commands to populate the food_data table with the data from the CSV files. Make sure to adjust the file paths as necessary.
+-- only when the tables are created, run the following commands to populate the food_data table with the data from the CSV files. Make sure to adjust the file paths as necessary.
 
--- COPY food_data 
---  FROM '/food-data/FOOD-DATA-GROUP1.csv'
---  WITH (FORMAT csv, HEADER true);
+COPY food_data 
+ FROM '/food-data/FOOD-DATA-GROUP1.csv'
+ WITH (FORMAT csv, HEADER true);
 
---  COPY food_data 
---  FROM '/food-data/FOOD-DATA-GROUP2.csv'
---  WITH (FORMAT csv, HEADER true);
+ COPY food_data 
+ FROM '/food-data/FOOD-DATA-GROUP2.csv'
+ WITH (FORMAT csv, HEADER true);
  
---  COPY food_data 
---  FROM '/food-data/FOOD-DATA-GROUP3.csv'
---  WITH (FORMAT csv, HEADER true);
+ COPY food_data 
+ FROM '/food-data/FOOD-DATA-GROUP3.csv'
+ WITH (FORMAT csv, HEADER true);
  
---  COPY food_data 
---  FROM '/food-data/FOOD-DATA-GROUP4.csv'
---  WITH (FORMAT csv, HEADER true);
+ COPY food_data 
+ FROM '/food-data/FOOD-DATA-GROUP4.csv'
+ WITH (FORMAT csv, HEADER true);
  
---  COPY food_data 
---  FROM '/food-data/FOOD-DATA-GROUP5.csv'
---  WITH (FORMAT csv, HEADER true);
+ COPY food_data 
+ FROM '/food-data/FOOD-DATA-GROUP5.csv'
+ WITH (FORMAT csv, HEADER true);
  
 
--- CREATE TABLE IF NOT EXISTS user_food_data (
---     id SERIAL PRIMARY KEY,
---     user_id INTEGER NOT NULL,
---     food_id INTEGER NOT NULL,
---     portion varchar(255) NOT NULL,
---     date_consumed DATE NOT NULL default CURRENT_DATE,
---     time_consumed TIME NOT NULL default CURRENT_TIME,
---     FOREIGN KEY (user_id) REFERENCES USERS(id),
---     FOREIGN KEY (food_id) REFERENCES food_data(id)
--- );
+CREATE TABLE IF NOT EXISTS user_food_data (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    food_id INTEGER NOT NULL,
+    portion varchar(255) NOT NULL,
+    date_consumed DATE NOT NULL default CURRENT_DATE,
+    time_consumed TIME NOT NULL default CURRENT_TIME,
+    FOREIGN KEY (user_id) REFERENCES USERS(id),
+    FOREIGN KEY (food_id) REFERENCES food_data(id)
+);

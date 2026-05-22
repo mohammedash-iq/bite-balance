@@ -146,4 +146,5 @@ async function getUserTodaysNutritions({ userId }) {
 }
 
 
+
 export { databaseAddUser, databaseGetUser, getProfile, updateUserHealthMetrics, getUserHealthMetrics, updateUserNutriGoals, getUserTodaysMeals, getUserTodaysNutritions };
