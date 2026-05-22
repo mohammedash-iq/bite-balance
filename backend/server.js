@@ -22,7 +22,7 @@ app.use("/api/users", userRoutes);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something broke!');
+    res.status(500).send({ type: "error", error: "Internal server Error" });
 });
 
 app.listen(PORT, () => {

@@ -23,7 +23,7 @@ foodScan.post("/manual-scan", async (req, res) => {
 foodScan.post("/food-options", async (req, res) => {
     const { query } = req.body;
     const foodOptions = await getFoodOptions(query);
-    res.send({ foodOptions: foodOptions });
+    res.send({ type: "success", foodOptions: foodOptions });
 });
 
 

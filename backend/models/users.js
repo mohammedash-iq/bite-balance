@@ -10,7 +10,6 @@ async function databaseAddUser({ username, password, email }) {
             [username, password, email, generateAvatar()]
         );
         const res = await client.query(`SELECT id FROM users WHERE email = $1`, [email]);
-        console.log('User added to the database successfully!');
         return { id: res.rows[0].id };
     }
     catch (err) {
@@ -100,7 +99,6 @@ async function updateUserHealthMetrics({ userId, age, height, weight, gender, ac
     let client;
     try {
         client = await pool.connect();
-        console.log("Updating user health metrics:", { userId, age, height, weight, gender, activity });
         await client.query(
             `INSERT INTO user_profile (user_id, age, height, weight,gender,activity) VALUES ($1, $2, $3, $4, $5, $6)`,
             [userId, age, height, weight, gender, activity]

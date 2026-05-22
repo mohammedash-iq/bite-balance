@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS USERS (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
 CREATE TYPE GENDER AS ENUM ('male', 'female');
 CREATE TYPE ACTIVITY AS ENUM('sedentary','lightly-active','moderately-active','very-active', 'extra-active');
 
@@ -68,7 +67,6 @@ zinc DECIMAL(10, 2) ,
 nutrition_density DECIMAL(10, 2) 
 );
 
--- only when the tables are created, run the following commands to populate the food_data table with the data from the CSV files. Make sure to adjust the file paths as necessary.
 
 COPY food_data 
  FROM '/food-data/FOOD-DATA-GROUP1.csv'

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { fetchProfile, fetchProfileHealthMetrics } from "../../services/userService";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const [user, setUser] = useState({});
   const [healthMetrics, setHealthMetrics] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadProfile = async () => {
@@ -15,64 +17,83 @@ function Profile() {
     loadProfile();
   }, []);
 
+  function handleLogout() {
+    localStorage.removeItem("token");
+    navigate("/");
+  }
+
   return (
-    <div className="apple-font min-h-screen px-5 py-8 mb-10 max-w-[600px] mx-auto text-palette-grey">
-      <div className="flex flex-col items-center gap-2 mb-8">
+    <div className="mx-auto max-w-2xl px-6 py-8 font-[var(--font-body)] text-[var(--color-ink)]">
+
+      {/* ── Profile Header ── */}
+      <div className="flex flex-col items-center mb-10">
         <img
           src={user ? user.image_url : "https://api.dicebear.com/9.x/thumbs/svg?seed=Sophie"}
           alt="Profile"
-          className="w-28 h-28 rounded-full bg-palette-thistle border-4 border-white shadow-sm object-cover"
+          className="w-28 h-28 rounded-full bg-[var(--color-cream-dark)] border-4 border-[var(--color-cream-border)] shadow-sm object-cover"
         />
-        <h1 className="mt-3 text-2xl font-semibold tracking-tight text-palette-grey">
+        <h1 className="mt-4 font-[var(--font-display)] text-2xl sm:text-3xl font-semibold tracking-tight text-[var(--color-ink)]">
           {user ? user.username : "Username"}
         </h1>
-        <h3 className="text-sm font-normal text-palette-grey/60">
+        <h3 className="mt-1 text-sm font-medium text-[var(--color-muted)]">
           {user ? user.email : "Email"}
         </h3>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 max-w-md mx-auto">
-        <h2 className="text-xs font-medium tracking-wide uppercase text-palette-grey/50 ml-1 mb-1">
-          Health Metrics
-        </h2>
-        <ul className="bg-palette-beige rounded-2xl overflow-hidden shadow-sm">
-          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
-            <span className="text-sm font-normal text-palette-grey/80">Age</span>
-            <span className="text-sm font-semibold text-palette-grey">{healthMetrics.age ? healthMetrics.age : ""}</span>
+      {/* ── Health Metrics ── */}
+      <div className="mx-auto max-w-md">
+        <div className="mb-4 text-center sm:text-left">
+          <span className="inline-block font-[var(--font-body)] uppercase tracking-[0.3em] text-xs font-semibold text-[var(--color-sage)] bg-[var(--color-sage-muted)] px-4 py-1.5 rounded-full">
+            Health Metrics
+          </span>
+        </div>
+
+        <ul className="rounded-[var(--radius-card)] border border-[var(--color-cream-border)] bg-[var(--color-cream-dark)] overflow-hidden divide-y divide-[var(--color-cream-border)] shadow-sm">
+          <li className="flex justify-between items-center px-6 py-4 bg-[var(--color-cream)]">
+            <span className="text-sm font-medium text-[var(--color-ink-soft)]">Age</span>
+            <span className="text-sm font-semibold text-[var(--color-ink)]">{healthMetrics.age ? healthMetrics.age : ""}</span>
           </li>
-          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
-            <span className="text-sm font-normal text-palette-grey/80">Weight</span>
-            <span className="text-sm font-semibold text-palette-grey">{healthMetrics.weight}</span>
+          <li className="flex justify-between items-center px-6 py-4 bg-[var(--color-cream)]">
+            <span className="text-sm font-medium text-[var(--color-ink-soft)]">Weight</span>
+            <span className="text-sm font-semibold text-[var(--color-ink)]">{healthMetrics.weight}</span>
           </li>
-          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
-            <span className="text-sm font-normal text-palette-grey/80">Height</span>
-            <span className="text-sm font-semibold text-palette-grey">{healthMetrics.height}</span>
+          <li className="flex justify-between items-center px-6 py-4 bg-[var(--color-cream)]">
+            <span className="text-sm font-medium text-[var(--color-ink-soft)]">Height</span>
+            <span className="text-sm font-semibold text-[var(--color-ink)]">{healthMetrics.height}</span>
           </li>
-          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
-            <span className="text-sm font-normal text-palette-grey/80">Protein Goal</span>
-            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.protein}</span>
+          <li className="flex justify-between items-center px-6 py-4 bg-[var(--color-cream)]">
+            <span className="text-sm font-medium text-[var(--color-ink-soft)]">Protein Goal</span>
+            <span className="text-sm font-bold text-[var(--color-sage)]">{healthMetrics.protein}</span>
           </li>
-          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
-            <span className="text-sm font-normal text-palette-grey/80">Calorie Goal</span>
-            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.calorie}</span>
+          <li className="flex justify-between items-center px-6 py-4 bg-[var(--color-cream)]">
+            <span className="text-sm font-medium text-[var(--color-ink-soft)]">Calorie Goal</span>
+            <span className="text-sm font-bold text-[var(--color-sage)]">{healthMetrics.calorie}</span>
           </li>
-          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
-            <span className="text-sm font-normal text-palette-grey/80">Sugar Goal</span>
-            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.sugar}</span>
+          <li className="flex justify-between items-center px-6 py-4 bg-[var(--color-cream)]">
+            <span className="text-sm font-medium text-[var(--color-ink-soft)]">Sugar Goal</span>
+            <span className="text-sm font-bold text-[var(--color-sage)]">{healthMetrics.sugar}</span>
           </li>
-          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
-            <span className="text-sm font-normal text-palette-grey/80">Fat Goal</span>
-            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.fat}</span>
+          <li className="flex justify-between items-center px-6 py-4 bg-[var(--color-cream)]">
+            <span className="text-sm font-medium text-[var(--color-ink-soft)]">Fat Goal</span>
+            <span className="text-sm font-bold text-[var(--color-sage)]">{healthMetrics.fat}</span>
           </li>
-          <li className="flex justify-between items-center px-5 py-3.5 border-b border-palette-thistle/60">
-            <span className="text-sm font-normal text-palette-grey/80">Fiber Goal</span>
-            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.fiber}</span>
+          <li className="flex justify-between items-center px-6 py-4 bg-[var(--color-cream)]">
+            <span className="text-sm font-medium text-[var(--color-ink-soft)]">Fiber Goal</span>
+            <span className="text-sm font-bold text-[var(--color-sage)]">{healthMetrics.fiber}</span>
           </li>
-          <li className="flex justify-between items-center px-5 py-3.5">
-            <span className="text-sm font-normal text-palette-grey/80">Carbs Goal</span>
-            <span className="text-sm font-semibold text-palette-teal">{healthMetrics.carbohydrates}</span>
+          <li className="flex justify-between items-center px-6 py-4 bg-[var(--color-cream)]">
+            <span className="text-sm font-medium text-[var(--color-ink-soft)]">Carbs Goal</span>
+            <span className="text-sm font-bold text-[var(--color-sage)]">{healthMetrics.carbohydrates}</span>
           </li>
         </ul>
+
+        {/* ── Logout Button ── */}
+        <button
+          onClick={handleLogout}
+          className="mt-8 w-full flex items-center justify-center rounded-full border border-[#d6c2b1] bg-[#f3e9de] px-6 py-3.5 text-sm font-semibold text-[var(--color-earth)] hover:bg-[#eaddcd] hover:border-[var(--color-earth-light)] transition-colors"
+        >
+          Logout
+        </button>
       </div>
     </div>
   );

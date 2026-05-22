@@ -1,23 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap");
 @import "tailwindcss";
 
-:root {
-  --color-palette-raspberry: #ff8c93;
-  --color-palette-thistle: #dedede;
-  --color-palette-beige: #dfdfdf;
-  --color-palette-teal: #858585;
-  --color-palette-grey: #323232;
-}
-
-.apple-font {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
-    "Helvetica Neue", Arial, sans-serif;
-}
-
 @theme {
-  --color-palette-raspberry: #d3ff47;
-  --color-palette-thistle: #d7f0d0;
-  --color-palette-beige: #ef00d1;
-  --color-palette-teal: #f7ba99;
-  --color-palette-grey: #ffff30;
+  /* ── Background surfaces ── */
+  --color-cream: #f5f0e8;
+  --color-cream-dark: #ede6d6;
+  --color-cream-border: #d8ceb8;
+
+  /* ── Sage (primary brand) ── */
+  --color-sage: #4a6741;
+  --color-sage-light: #6b8f61;
+  --color-sage-muted: #e8efe6;
+  --color-sage-dim: #c4d4bf;
+
+  /* ── Earth (secondary accent) ── */
+  --color-earth: #8b5e3c;
+  --color-earth-light: #a8784f;
+
+  /* ── Ink (text) ── */
+  --color-ink: #1e1e1a;
+  --color-ink-soft: #3d3d35;
+  --color-muted: #7a7a6e;
+  --color-muted-light: #a8a89a;
+
+  /* ── Typography ── */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+
+  /* ── Border radius ── */
+  --radius-card: 20px;
+  --radius-pill: 9999px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
 }

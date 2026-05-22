@@ -1,6 +1,4 @@
 import { Pool } from 'pg';
-import dotenv from 'dotenv';
-import fs from 'fs';
 
 const pool = new Pool({
     min: 0,
@@ -12,22 +10,4 @@ const pool = new Pool({
     password: "password",
     port: 5432,
 });
-
-const sql = fs.readFileSync("./schema.sql").toString();
-
-async function initializeDatabase() {
-    let client;
-    try {
-        client = await pool.connect();
-        console.log("Connected to the database successfully!");
-        await client.query(sql);
-    }
-    catch (err) {
-        console.error('Error initializing the database:', err.message);
-    }
-    finally {
-        if (client) client.release();
-    }
-}
-initializeDatabase()
 export default pool;

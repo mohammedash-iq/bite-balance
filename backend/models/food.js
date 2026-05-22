@@ -4,8 +4,7 @@ async function getFoodOptions(query) {
     let client;
     try {
         client = await pool.connect();
-        const result = await client.query(`
-        SELECT id, food FROM food_data where food like '%${query}%' limit 10;`);
+        const result = await client.query(`SELECT id, food FROM food_data where food like '%${query}%' limit 10;`);
         return result.rows;
     }
     catch (error) {
